@@ -16,8 +16,36 @@
       }
     </script>
     <form action="" method="GET" name="kirim">
-      bilangan1 : <input type="text" name="bil_1" /><br />
-      bilangan2 : <input type="text" name="bil_2" /><br />
+        <table border="1">
+            <tr>
+                <th>No</th>
+                <th>Nama Barang</th>
+                <th>Harga Barang @</th>
+                <th>Quantity</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>beras</td>
+                <td><input type="text" name="hargaberas" disabled value="12.000"></td>
+                <td><input type="text" name="banyakberas" ></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Gula</td>
+                <td><input type="text" name="hargula" disabled value="14.000"></td>
+                <td><input type="text" name="banyakgula" ></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>beras</td>
+                <td><input type="text" name="hargaberas" disabled value="16.000"></td>
+                <td><input type="text" name="banyakminyak" ></td>
+            </tr>
+            <tr>
+                <td colspan="3">Harga Total</td>
+                <td></td>
+            </tr>
+        </table>
       <input type="button" value="klik" onclick="fn()" />
     </form>
   </body>
