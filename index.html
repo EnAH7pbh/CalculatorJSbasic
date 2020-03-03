@@ -3,50 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CONTOH</title>
+    <title>KALKULATOR</title>
+    
   </head>
   <body>
-    <header>hello world</header>
+    <header>KALKULATOR SEDERHANA</header>
     <script>
       function fn() {
-        var a = document.kirim.bil_1.value;
-        var b = document.kirim.bil_2.value;
-        var c = parseInt(a) + parseInt(b);
-        window.alert("hasil tambah : " + c);
+        var a1 = document.kirim.hargaberas.value;
+        var a2 = document.kirim.banyakberas.value;
+        var b1 = document.kirim.hargagula.value;
+        var b2 = document.kirim.banyakgula.value;
+        var c1 = document.kirim.hargaminyak.value;
+        var c2 = document.kirim.banyakminyak.value;
+        var a = parseInt(a1) * parseInt(a2);
+        var b = parseInt(b1) * parseInt(b2);
+        var c = parseInt(c1) * parseInt(c2);
+        var tot = getNum(a)+getNum(b)+getNum(c);
+        var disc = 0;
+        if(tot>100000){
+          disc += 0.1 * tot;
+          document.kirim.diskontotal.value = "10%";
+        }else{
+          document.kirim.diskontotal.value = "0";
+        }
+        if(document.getElementById("mmbr").checked){
+          disc += 0.05 * tot;
+          document.kirim.diskonmember.value = "5%";
+        }else{
+          document.kirim.diskonmember.value = "0";
+        }
+        document.kirim.totalbelanjaan.value = getNum(tot) - getNum(disc);
+      }
+      function getNum(val){
+        if(isNaN(val)){
+          return 0;
+        }
+        return val;
       }
     </script>
     <form action="" method="GET" name="kirim">
-        <table border="1">
-            <tr>
-                <th>No</th>
-                <th>Nama Barang</th>
-                <th>Harga Barang @</th>
-                <th>Quantity</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>beras</td>
-                <td><input type="text" name="hargaberas" disabled value="12.000"></td>
-                <td><input type="text" name="banyakberas" ></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Gula</td>
-                <td><input type="text" name="hargula" disabled value="14.000"></td>
-                <td><input type="text" name="banyakgula" ></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>beras</td>
-                <td><input type="text" name="hargaberas" disabled value="16.000"></td>
-                <td><input type="text" name="banyakminyak" ></td>
-            </tr>
-            <tr>
-                <td colspan="3">Harga Total</td>
-                <td></td>
-            </tr>
-        </table>
-      <input type="button" value="klik" onclick="fn()" />
+      <table border="1">
+        <tr>
+          <th>No</th>
+          <th>Nama Barang</th>
+          <th>Harga Barang @</th>
+          <th>Quantity</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>beras</td>
+          <td>
+            <input type="text" name="hargaberas" disabled value= 12000 />
+          </td>
+          <td><input type="text" name="banyakberas" onkeyup="fn()"/></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Gula</td>
+          <td><input type="text" name="hargagula" disabled value=14000 /></td>
+          <td><input type="text" name="banyakgula" onkeyup="fn()"/></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>beras</td>
+          <td>
+            <input type="text" name="hargaminyak" disabled value=16000 />
+          </td>
+          <td><input type="text" name="banyakminyak" onkeyup="fn()"/></td>
+        </tr>
+        <tr>
+          <td colspan="3">Merupakan Member?</td>
+          <td><input type="checkbox" id="mmbr" name="member" onclick="fn()"/></td>
+        </tr>
+        <tr>
+          <td colspan="3">Harga Total</td>
+          <td><input type="text" name="totalbelanjaan" disabled value="0"/></td>
+        </tr>
+        <tr>
+          <td colspan="3">diskon total</td>
+          <td><input type="text" name="diskontotal" disabled value="0"/></td>
+        </tr>
+        <tr>
+          <td colspan="3">diskon member</td>
+          <td><input type="text" name="diskonmember" disabled value="0"/></td>
+        </tr>
+      </table>
     </form>
   </body>
 </html>
