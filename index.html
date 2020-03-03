@@ -4,42 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>KALKULATOR</title>
-    
   </head>
   <body>
     <header>KALKULATOR SEDERHANA</header>
     <script>
+      var disc = 0;
       function fn() {
-        var a1 = document.kirim.hargaberas.value;
-        var a2 = document.kirim.banyakberas.value;
-        var b1 = document.kirim.hargagula.value;
-        var b2 = document.kirim.banyakgula.value;
-        var c1 = document.kirim.hargaminyak.value;
-        var c2 = document.kirim.banyakminyak.value;
-        var a = parseInt(a1) * parseInt(a2);
-        var b = parseInt(b1) * parseInt(b2);
-        var c = parseInt(c1) * parseInt(c2);
-        var tot = getNum(a)+getNum(b)+getNum(c);
-        var disc = 0;
-        if(tot>100000){
+        var a1 = document.kirim.hargaspesial.value;
+        var a2 = document.kirim.banyakspesial.value;
+        var b1 = document.kirim.hargaistimewa.value;
+        var b2 = document.kirim.banyakistimewa.value;
+        var c1 = document.kirim.hargabakar.value;
+        var c2 = document.kirim.banyakbakar.value;
+        var d1 = document.kirim.hargabiasa.value;
+        var d2 = document.kirim.banyakbiasa.value;
+        var a = checkDisc(a1, a2);
+        var b = checkDisc(b1, b2);
+        var c = checkDisc(c1, c2);
+        var d = checkDisc(d1, d2);
+        var tot = getNum(a) + getNum(b) + getNum(c) + getNum(d);
+        document.kirim.totalbelanjaan.value = tot;
+        disc = 0;
+        if (tot > 100000) {
           disc += 0.1 * tot;
-          document.kirim.diskontotal.value = "10%";
-        }else{
-          document.kirim.diskontotal.value = "0";
         }
-        if(document.getElementById("mmbr").checked){
+        var e = document.getElementById("mmbr");
+        if ("member" == e.options[e.selectedIndex].value) {
           disc += 0.05 * tot;
-          document.kirim.diskonmember.value = "5%";
-        }else{
-          document.kirim.diskonmember.value = "0";
         }
-        document.kirim.totalbelanjaan.value = getNum(tot) - getNum(disc);
+        document.kirim.diskontotal.value = disc;
+        document.kirim.totalbayar.value = getNum(tot) - getNum(disc);
       }
-      function getNum(val){
-        if(isNaN(val)){
+      function getNum(val) {
+        if (isNaN(val)) {
           return 0;
         }
         return val;
+      }
+      function checkDisc(var1, var2) {
+        return parseInt(var1) * parseInt(var2);
       }
     </script>
     <form action="" method="GET" name="kirim">
@@ -52,41 +55,65 @@
         </tr>
         <tr>
           <td>1</td>
-          <td>beras</td>
+          <td>bakso spesial</td>
           <td>
-            <input type="text" name="hargaberas" disabled value= 12000 />
+            Rp :
+            <input type="text" name="hargaspesial" disabled value="25000" />
           </td>
-          <td><input type="text" name="banyakberas" onkeyup="fn()"/></td>
+          <td><input type="text" name="banyakspesial" onkeyup="fn()" /></td>
         </tr>
         <tr>
           <td>2</td>
-          <td>Gula</td>
-          <td><input type="text" name="hargagula" disabled value=14000 /></td>
-          <td><input type="text" name="banyakgula" onkeyup="fn()"/></td>
+          <td>bakso istimewa</td>
+          <td>
+            Rp :
+            <input type="text" name="hargaistimewa" disabled value="20000" />
+          </td>
+          <td><input type="text" name="banyakistimewa" onkeyup="fn()" /></td>
         </tr>
         <tr>
           <td>3</td>
-          <td>beras</td>
+          <td>bakso bakar</td>
           <td>
-            <input type="text" name="hargaminyak" disabled value=16000 />
+            Rp :
+            <input type="text" name="hargabakar" disabled value="15000" />
           </td>
-          <td><input type="text" name="banyakminyak" onkeyup="fn()"/></td>
+          <td><input type="text" name="banyakbakar" onkeyup="fn()" /></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>bakso biasa</td>
+          <td>
+            Rp :
+            <input type="text" name="hargabiasa" disabled value="10000" />
+          </td>
+          <td><input type="text" name="banyakbiasa" onkeyup="fn()" /></td>
         </tr>
         <tr>
           <td colspan="3">Merupakan Member?</td>
-          <td><input type="checkbox" id="mmbr" name="member" onclick="fn()"/></td>
+          <td>
+            <select id="mmbr" onclick="fn()">
+              <option value="bukan" selected>bukan member</option>
+              <option value="member">Member</option>
+            </select>
+          </td>
         </tr>
         <tr>
           <td colspan="3">Harga Total</td>
-          <td><input type="text" name="totalbelanjaan" disabled value="0"/></td>
+          <td>
+            <input type="text" name="totalbelanjaan" disabled value="0" />
+          </td>
         </tr>
         <tr>
           <td colspan="3">diskon total</td>
-          <td><input type="text" name="diskontotal" disabled value="0"/></td>
+          <td><input type="text" name="diskontotal" disabled value="0" /></td>
         </tr>
         <tr>
-          <td colspan="3">diskon member</td>
-          <td><input type="text" name="diskonmember" disabled value="0"/></td>
+          <td colspan="3">Total Bayar</td>
+          <td><input type="text" name="totalbayar" disabled value="0" /></td>
+        </tr>
+        <tr>
+          <td colspan="4" >Keterangan : Diskon apabila total pembelian di atas 100.000 </td>
         </tr>
       </table>
     </form>
